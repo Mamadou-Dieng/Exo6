@@ -1,0 +1,87 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+'======================
+' Classe Utilisateur
+'======================
+class Utilisateur {
+    - nom : String
+    - prenom : String
+    - numTel : long
+    - mail : String
+
+    + authentifier()
+    + deconnecter()
+}
+
+'======================
+' Classe Lecteur
+'======================
+class Lecteur {
+    - idLecteur : String
+    - etablissement : String
+}
+
+'======================
+' Classe Bibliothécaire
+'======================
+class Bibliothecaire {
+    - id_bibliothecaire : String
+}
+
+'======================
+' Classe Livre
+'======================
+class Livre {
+    - idLivre : String
+    - titre : String
+    - auteur : String
+
+    + emprunter_livre()
+    + retourner_livre()
+    + consulter_livre()
+    + rechercher_livre()
+    + ajouter_livre()
+    + modifier_livre()
+    + supprimer_livre()
+}
+
+'======================
+' Classe Emprunt
+'======================
+class Emprunt {
+    - id : String
+    - date_emprunt : Date
+    - date_retour : Date
+}
+
+'======================
+' Classe Penalite
+'======================
+class Penalite {
+    - idPenalite : String
+    - nbJourRetard : int
+    - montant : double
+
+    + calculer()
+}
+
+'======================
+' Héritage
+'======================
+Utilisateur <|-- Lecteur
+Utilisateur <|-- Bibliothecaire
+
+'======================
+' Associations
+'======================
+
+Lecteur "1" --> "0..*" Emprunt : effectue
+
+Emprunt "*" --> "1" Livre : concerne
+
+Emprunt "1" --> "0..1" Penalite : génère
+
+Bibliothecaire "1" --> "0..*" Livre : gère
+
+@enduml
